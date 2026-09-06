@@ -16,7 +16,7 @@ DB_HTTP_PATH = os.getenv("DB_HTTP_PATH")
 APIFY_KEY = os.getenv("APIFY_KEY")
 MODEL_NAME = "qwen2.5vl"
 OLLAMA_ENDPOINT = "http://localhost:11434/api/generate"
-POST_COUNT = 5
+POST_COUNT = 10
 
 client = ApifyClient(APIFY_KEY)
 
@@ -155,6 +155,10 @@ def analyze_image(img_url):
         You are a professional fashion analyst. Analyze the provided outfit image.
 
         Extract the distinct clothing items and accessories visible.
+        Do not include:
+        - Items that are not removable such as hair, nails, or tattoos.
+        - Electronic devices such as smartphones or headphones.
+        
         Return a JSON with this schema for each item:
         {
             "items": [
